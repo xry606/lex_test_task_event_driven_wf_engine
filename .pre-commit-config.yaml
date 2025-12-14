@@ -1,0 +1,60 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.6.0
+    hooks:
+      - id: check-case-conflict
+      - id: check-executables-have-shebangs
+      - id: check-toml
+      - id: check-docstring-first
+      - id: check-merge-conflict
+      - id: detect-private-key
+      - id: trailing-whitespace
+      - id: file-contents-sorter
+      - id: end-of-file-fixer
+      - id: mixed-line-ending
+      - id: check-added-large-files
+        args: ["--maxkb=1024"]
+#      - id: no-commit-to-branch
+#        args: [--branch, main, --branch, master, --branch, develop]
+      - id: check-ast
+#      - id: check-builtin-literals
+      - id: check-yaml
+        args: [ "--allow-multiple-documents" ]
+        files: "\\.(ya?ml)$"
+        exclude: "^\\.helm/"
+      - id: pretty-format-json
+        args: ["--autofix"]
+        exclude: |
+          (?x)(
+            ^package-lock\.json$|
+            ^.*\.ipynb$
+          )
+
+      - id: check-xml
+      - id: forbid-new-submodules
+      - id: check-symlinks
+
+  - repo: https://github.com/Lucas-C/pre-commit-hooks-bandit
+    rev: v1.0.6
+    hooks:
+      - id: python-bandit-vulnerability-check
+        language: python
+        args: ["-lll", "--recursive", "./src", "--skip", "B605"]
+        files: \.py$
+
+  - repo: https://github.com/psf/black
+    rev: 25.1.0
+    hooks:
+      - id: black
+        language_version: python3.12
+        args: [ "--line-length", "88" ]
+
+  - repo: https://github.com/charliermarsh/ruff-pre-commit
+    rev: v0.12.9
+    hooks:
+      - id: ruff
+        args: [
+          "--fix",
+          "--exit-non-zero-on-fix",
+          "--exclude", "*/migrations/*"
+        ]

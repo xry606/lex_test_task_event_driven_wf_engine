@@ -1,0 +1,27 @@
+# Python artifacts
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+.pytest_cache/
+.coverage*
+htmlcov/
+
+# Virtual environments
+.venv/
+venv/
+
+# IDE/editor
+.idea/
+.vscode/
+*.swp
+
+# Byte-compiled / logs
+*.log
+
+# Docker
+*.pid
+dist/
+build/
+*.egg-info/
